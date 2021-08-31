@@ -1,0 +1,111 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+//Main
+
+namespace MyBankApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            var account = new BankAccount("Kirt", 10000);
+            Console.WriteLine($"Account {account.Number} was created for {account.Owner} with {account.Balance}");
+
+        }
+    }
+}
+
+//Bank Account class
+namespace MyBankApp
+{
+    class BankAccount
+    {
+
+        public string Number { get; }
+        public string Owner { get; set; }
+        public decimal Balance
+        {
+            get
+            {
+                decimal balance = 0;
+
+                foreach (var item in allTranscatiomns)
+
+                {
+                    balance += item.Amount;
+                }
+                return balance;
+            }
+        }
+
+        private static int accountNumberSeed = 1234567890;
+
+        private List<Transcation> allTranscatiomns = new List<Transcation>();
+
+        public BankAccount (string name, decimal initialBalance)
+        {
+            Owner = name;
+         
+            Number = accountNumberSeed.ToString();
+            accountNumberSeed++;
+
+        }
+
+        public void MakeDeposit (decimal amount, DateTime date, string note)
+        {
+
+            if (amount <=0)
+
+            {
+                throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be positive");
+            }
+
+            var deposit = new Transcation(amount, date, note);
+            allTranscatiomns.Add(deposit);
+
+        }
+        
+        public void MakeWithdrawl (decimal amount, DateTime date, string note)
+        {
+
+        }
+
+    }
+}
+
+
+///Transcation Class
+
+namespace MyBankApp
+{
+    public class Transcation { 
+
+
+    public decimal Amount { get; }
+
+    public DateTime Date { get; }
+
+    public string Note { get; }
+
+
+
+    public Transcation (decimal amount, DateTime date, string note)
+        {
+            Amount = amount;
+            Date = date;
+            Note = note;
+
+        }
+
+
+      
+
+    
+
+    }
+}
+
+
